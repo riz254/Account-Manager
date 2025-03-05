@@ -1,0 +1,155 @@
+<div class="m-7">
+  <!-- Add customers button -->
+  <div class="center justify-center flex">
+    <button
+      class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
+      (click)="openModal()"
+    >
+      + Add New Customer
+    </button>
+  </div>
+  <!-- Modal -->
+  <div
+    *ngIf="showModal"
+    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50"
+  >
+    <div class="bg-white p-6 rounded-lg shadow-md w-1/3">
+      <h2 class="text-xl font-bold mb-4">Add New Customer</h2>
+
+      <!-- Form -->
+      <form #customerForm="ngForm" (ngSubmit)="onSubmit(customerForm)">
+        <label class="block text-gray-700 font-medium">Customer Name</label>
+        <input
+          type="text"
+          [(ngModel)]="customer.fullName"
+          name="fullName"
+          required
+          class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter customer name"
+        />
+
+        <label class="block text-gray-700 font-medium">Customer Email</label>
+        <input
+          type="email"
+          [(ngModel)]="customer.email"
+          name="email"
+          required
+          class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter customer email"
+        />
+
+        <label class="block text-gray-700 font-medium"
+          >Customer Phone Number</label
+        >
+        <input
+          type="number"
+          [(ngModel)]="customer.phoneNumber"
+          name="phoneNumber"
+          required
+          class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter customer phone number"
+        />
+
+        <label class="block text-gray-700 font-medium"
+          >Date of Registration</label
+        >
+        <input
+          type="date"
+          [(ngModel)]="customer.dateOfRegistration"
+          name="dateOfRegistration"
+          required
+          class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+        />
+
+        <label class="block text-gray-700 font-medium">Customer Type</label>
+        <select
+          [(ngModel)]="customer.customerType"
+          name="customerType"
+          required
+          class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="" disabled selected>Select Customer Type</option>
+          <option value="Individual">Individual</option>
+          <option value="Business">Business</option>
+        </select>
+
+        <label class="block text-gray-700 font-medium"
+          >Profile Picture (Base64)</label
+        >
+        <input
+          type="text"
+          [(ngModel)]="customer.profilePicture"
+          name="profilePicture"
+          class="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
+          placeholder="Paste Base64 string"
+        />
+
+        <!-- Buttons -->
+        <div class="flex justify-end space-x-2 mt-4">
+          <button
+            type="button"
+            class="bg-gray-400 text-white p-2 rounded hover:bg-gray-500 transition"
+            (click)="closeModal()"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Customers List -->
+  <div class="m-20">
+    <h3 class="text-2xl place-self-center font-bold text-gray-800 mb-2">
+      Customers List
+    </h3>
+    <table class="w-full border-collapse border border-gray-900 mt-4">
+      <thead>
+        <tr class="bg-gray-600 text-white">
+          <th class="border p-4 text-2xl">ID</th>
+          <th class="border p-4 text-2xl">Name</th>
+          <th class="border p-4 text-2xl">Email</th>
+          <th class="border p-4 text-2xl">Phone</th>
+          <th class="border p-4 text-2xl">Type</th>
+          <th class="border p-4 text-2xl">Profile Picture</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let customer of customers"
+          class="border p-2 rounded mb-2 odd:bg-white even:bg-gray-100"
+        >
+          <td class="border p-4 pl-10 text-xl border-r-gray-300">
+            {{ customer.id }}
+          </td>
+          <td class="border p-4 pl-10 text-xl border-l-gray-300">
+            {{ customer.fullName }}
+          </td>
+          <td class="border p-4 pl-10 text-xl border-l-gray-300">
+            {{ customer.email }}
+          </td>
+          <td class="border p-4 pl-10 text-xl border-l-gray-300">
+            {{ customer.phoneNumber }}
+          </td>
+          <td class="border p-4 pl-10 text-xl border-l-gray-300">
+            {{ customer.customerType }}
+          </td>
+          <td class="border p-4 pl-10 text-xl border-l-gray-300">
+            <img
+              [src]="customer.profilePicture"
+              alt="Profile"
+              class="w-10 h-10 rounded-full"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
