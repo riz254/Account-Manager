@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Customer } from './models.model';
+import { Account } from './models.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomerService {
   private storageKey = 'customers';
+  private accountStorageKey = 'accounts';
 
   getCustomers(): Customer[] {
     return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
@@ -36,5 +38,41 @@ export class CustomerService {
       (customer) => customer.id !== id
     );
     localStorage.setItem(this.storageKey, JSON.stringify(customers));
+  }
+
+  //  Get all accounts
+  getAccounts(): Account[] {
+    return JSON.parse(localStorage.getItem(this.accountStorageKey) || '[]');
+  }
+
+  // Get accounts for a specific customer
+  getAccountsByCustomerId(customerId: number): Account[] {
+    return this.getAccounts().filter(
+      (account) => account.customerId === customerId
+    );
+  }
+
+  //  Add a new account
+  addAccount(account: Account) {
+    const accounts = this.getAccounts();
+    account.id = accounts.length + 1; // Auto-increment ID
+    accounts.push(account);
+    localStorage.setItem(this.accountStorageKey, JSON.stringify(accounts));
+  }
+
+  // Update an existing account
+  updateAccount(updatedAccount: Account) {
+    const accounts = this.getAccounts().map((account) =>
+      account.id === updatedAccount.id ? updatedAccount : account
+    );
+    localStorage.setItem(this.accountStorageKey, JSON.stringify(accounts));
+  }
+
+  // Delete an account
+  deleteAccount(accountId: number) {
+    const accounts = this.getAccounts().filter(
+      (account) => account.id !== accountId
+    );
+    localStorage.setItem(this.accountStorageKey, JSON.stringify(accounts));
   }
 }

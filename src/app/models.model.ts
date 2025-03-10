@@ -7,6 +7,7 @@ export interface Customer {
   dateOfRegistration: string;
   customerType: 'Individual' | 'Business';
   profilePicture: string; // Base64
+  Accounts?: Account[];
 }
 
 // models/account.model.ts
@@ -17,6 +18,7 @@ export interface Account {
   accountType: 'Savings' | 'Checking' | 'Business';
   balance: number;
   status: 'Active' | 'Suspended' | 'Closed';
+  Transactions?: Transaction[];
 }
 
 // models/transaction.model.ts
