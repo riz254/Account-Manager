@@ -1,1 +1,38 @@
-<p>navbar works!</p>
+<div class="bg-jungleGreen p-4 text-white">
+  <div
+    class="w-full text-white shadow-sm shadow-emerald-100 rounded-3xl px-6 py-2 flex flex-wrap items-center justify-between"
+  >
+    <div class="grid">
+      <h1 class="text-2xl font-extrabold font-quicksand text-emerald-50">
+        {{ currentPage }}
+      </h1>
+      <p class="text-md text-orange-400">{{ currentDate }}</p>
+    </div>
+    <!-- Search Bar -->
+    <div class="hidden md:block relative">
+      <input
+        type="text"
+        placeholder="Search..."
+        class="border border-gray-300 rounded-lg py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-green-500"
+      />
+      <span class="absolute left-3 top-2 text-gray-400"></span>
+    </div>
+
+    <!-- Navigation Buttons (Hidden on small screens) -->
+    <div class="hidden md:flex space-x-4">
+      <button class="bg-emerald-600 p-2 rounded">Reports</button>
+      <button class="bg-orange-600 p-2 rounded">Reports</button>
+      <button class="bg-emerald-600 p-2 rounded">Settings</button>
+    </div>
+
+    <!-- User Profile -->
+    <div class="flex items-center space-x-4">
+      <span class="text-gray-300">Admin</span>
+      <img
+        src="https://via.placeholder.com/40"
+        alt="User Avatar"
+        class="w-10 h-10 rounded-full border border-gray-300"
+      />
+    </div>
+  </div>
+</div>
